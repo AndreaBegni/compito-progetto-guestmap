@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Card } from "react-bootstrap";
 
 var scrollableDivStyle = {
-  width: 300,
   height: 400,
   overflowY: "auto",
   margin: "0 auto",
