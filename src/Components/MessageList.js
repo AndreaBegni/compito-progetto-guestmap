@@ -10,41 +10,20 @@ var scrollableDivStyle = {
 };
 
 export default class MessageList extends Component {
+  createMessageCard = message => {
+    return (
+      <Card>
+        <Card.Body>
+          <Card.Text>{message.content}</Card.Text>
+        </Card.Body>
+      </Card>
+    );
+  };
+
   render() {
     return (
       <div style={scrollableDivStyle} ref="scrollableDiv">
-        <Card>
-          <Card.Body onClick={() => console.log("ciao")}>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card 's content
-            </Card.Text>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Body onClick={() => console.log("ciao")}>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card 's content.
-            </Card.Text>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Body onClick={() => console.log("ciao")}>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card 's content.
-            </Card.Text>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Body onClick={() => console.log("ciao")}>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card 's content.
-            </Card.Text>
-          </Card.Body>
-        </Card>
+        {this.props.messages.map(this.createMessageCard)}
       </div>
     );
   }
