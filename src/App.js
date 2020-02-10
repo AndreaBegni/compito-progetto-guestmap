@@ -16,7 +16,26 @@ export default class App extends Component {
         { content: "messaggio numero 3", lat: "20.54", lon: "25.21" }
       ]
     };
+
+    this.inputField = React.createRef();
   }
+
+  sendMessage = () => {
+    let url = "http://localhost:8080/guestmap/messages";
+    let data = {
+      content: this.inputField.current.value,
+      lat: Math.random() * (50 - -50) - 50,
+      lon: Math.random() * (50 - -50) - 50
+    };
+    const HTTPPost = {
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify(data),
+      method: "POST"
+    };
+    fetch(url, HTTPPost);
+  };
 
   render() {
     return (
@@ -37,6 +56,7 @@ export default class App extends Component {
               <br></br>
               <Form.Group>
                 <Form.Control
+                  ref={this.inputField}
                   type="text"
                   placeholder="Share a message with the world"
                 />
@@ -44,7 +64,9 @@ export default class App extends Component {
             </Col>
             <Col md={4}>
               <br></br>
-              <Button block="true">Share</Button>
+              <Button block="true" onClick={() => this.sendMessage()}>
+                Share
+              </Button>
             </Col>
           </Row>
         </Container>
