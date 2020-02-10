@@ -10,14 +10,16 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      messages: [
-        { content: "messaggio numero 1", lat: "45.54", lon: "10.21" },
-        { content: "messaggio numero 2", lat: "30.54", lon: "15.21" },
-        { content: "messaggio numero 3", lat: "20.54", lon: "25.21" }
-      ]
+      messages: []
     };
 
     this.inputField = React.createRef();
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:8080/guestmap/messages")
+      .then(r => r.json())
+      .then(r => this.setState({ messages: r.messages }));
   }
 
   sendMessage = () => {
