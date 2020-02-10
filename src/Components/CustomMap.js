@@ -23,7 +23,7 @@ export default class CustomMap extends Component {
 
   render() {
     return (
-      <Map center={[45.54, 10.21]} zoom={10}>
+      <Map center={[45.54, 10.21]} zoom={5}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
