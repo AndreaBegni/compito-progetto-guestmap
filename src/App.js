@@ -5,6 +5,14 @@ import { Container, Row, Col } from "react-bootstrap/";
 import { Form } from "react-bootstrap/";
 import { Button } from "react-bootstrap/";
 
+const getCoordinates = () => {
+  return new Promise(resolve => {
+    navigator.geolocation.getCurrentPosition(position => {
+      resolve(position.coords);
+    });
+  });
+};
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -22,12 +30,13 @@ export default class App extends Component {
       .then(r => this.setState({ messages: r.messages }));
   }
 
-  sendMessage = () => {
+  sendMessage = async () => {
+    let { latitude, longitude } = await getCoordinates();
     let url = "http://localhost:8080/guestmap/messages";
     let data = {
       content: this.inputField.current.value,
-      lat: Math.random() * (50 - -50) - 50,
-      lon: Math.random() * (50 - -50) - 50
+      lat: latitude,
+      lon: longitude
     };
     const HTTPPost = {
       headers: {
